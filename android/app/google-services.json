@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396047327155",
+    "project_id": "instant-notes-mm",
+    "storage_bucket": "instant-notes-mm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396047327155:android:070814699a27a0ed2bf5c6",
+        "android_client_info": {
+          "package_name": "com.example.instant_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396047327155-0h6b00t7valuiqfe0gcqubht3on70s1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ83rM3PDgvhlhUCVBYh24vQc7XpFbaXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396047327155-0h6b00t7valuiqfe0gcqubht3on70s1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
