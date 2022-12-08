@@ -13,8 +13,8 @@ import 'registration.dart';
 class StartPage extends StatelessWidget {
   final _pref = SharedPreferences.getInstance();
   final formKey = GlobalKey<FormState>();
-  late LogInRequest _request;
-  late LogInController _controller;
+  late final LogInRequest _request;
+  late final LogInController _controller;
 
   StartPage({super.key}){
     _controller = LogInController();
@@ -50,6 +50,7 @@ class StartPage extends StatelessWidget {
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
                       try{
+                        final nav = Navigator.of(context);
                         var userData = await _controller.validateUser(_request);
                         var pref = await _pref;
                         pref.setString("eMail", userData.eMail!);
@@ -59,7 +60,8 @@ class StartPage extends StatelessWidget {
                           password: _request.password,
                         );*/
                         //var userName = _controller.validateUser(_request);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoldersPage(/*eMail: request.eMail, password: _request.password*/)));
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const FoldersPage(/*eMail: request.eMail, password: _request.password*/)));
+                        nav.push(MaterialPageRoute(builder: (context) => const FoldersPage()));
                       /*} on FirebaseAuthException catch (e) {
                         if(e.code == 'user-not-found'){
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Usuario no encontrado')));

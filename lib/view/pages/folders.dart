@@ -38,8 +38,7 @@ class _FoldersPageState extends State<FoldersPage>{
         appBar: const GeneralAppBar(),
         drawer: GeneralDrawer(),
         body: Padding(padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
+          child: Column(children: [
               const VerticalSpace(height: 20),
               Row(children: const [
                 Text("Carpetas",
@@ -76,8 +75,10 @@ class _FoldersPageState extends State<FoldersPage>{
                         icon: const Icon(Icons.remove_circle_outline),
                         onPressed: () {
                         },),
-                      onTap: () {
+                      onTap: () async {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const NotesPage()));
+                        var pref = await _pref;
+                        pref.setString("id", folder.id!);
                       },
                     );
                   },

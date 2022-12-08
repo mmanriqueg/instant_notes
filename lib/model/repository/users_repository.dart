@@ -31,7 +31,8 @@ class UserRepository{
     }*/
 
     //var users = await query.docs.cast();
-    var users = await query.docs.cast().map((e) => e.data());
+    //var users = await query.docs.cast().map((e) => e.data());
+    var users = query.docs.cast().map((e) => e.data());
 
     if(users.isEmpty){
       return Future.error("Usuario no encontrado");

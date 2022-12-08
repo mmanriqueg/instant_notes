@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 import 'package:instant_notes/model/entity/notes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../controller/note_access.dart';
 import '../widgets/others.dart';
 import '../widgets/text_fields.dart';
 import '../widgets/headings.dart';
-import 'notes.dart';
+//import 'notes.dart';
 
 class NewNotePage extends StatelessWidget {
+  late final NoteAccessController _controller;
   final formKey = GlobalKey<FormState>();
   late final NoteEntity _note;
+  final _pref = SharedPreferences.getInstance();
 
   NewNotePage({super.key}){
     _note = NoteEntity();
+    _controller = NoteAccessController();
+    _pref.then((pref){
+    _note.userEMail = pref.getString("eMail");
+    _note.folderId = pref.getString("id");
+    });
   }
 
   @override
@@ -97,14 +107,25 @@ class NewNotePage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF676cc9),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if(formKey.currentState!.validate()){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Nota creada"),
-                      ),
-                    );
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NotesPage()));
+                    formKey.currentState!.save();
+                    //_folder.urlImage = _image.urlImage;
+                    try{
+                      final mess = ScaffoldMessenger.of(context);
+                      final nav = Navigator.of(context);
+                      await _controller.save(_note);
+                      //ScaffoldMessenger.of(context).showSnackBar(
+                        mess.showSnackBar(
+                        const SnackBar(
+                          content: Text("Nota creada"),
+                        ),
+                      );
+                      nav.pop();
+                      //Navigator.pop(context);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $e"),),);
+                    }
                   }
                 },
                 child: const Text("Guardar"),

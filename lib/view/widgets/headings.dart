@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instant_notes/controller/log_in.dart';
 import 'package:instant_notes/view/widgets/others.dart';
 import '../pages/about.dart';
+import '../pages/folders.dart';
 import '../pages/new_folder.dart';
 import '../pages/start.dart';
 
@@ -58,6 +59,14 @@ class GeneralDrawer extends StatelessWidget {
                 ),
             ],),
           ),
+          ListTile(
+            leading: const Icon(Icons.folder_rounded),
+            title: const Text("Ver carpetas"),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const FoldersPage()));
+            },
+          ),
+          const StandardDivider(height: 50, thickness: 1),
           ListTile(
             leading: const Icon(Icons.add_circle_rounded),
             title: const Text("Nueva carpeta"),

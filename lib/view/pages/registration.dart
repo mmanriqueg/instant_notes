@@ -13,8 +13,8 @@ class RegistrationPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   /*final String userName;
   final String password;*/
-  late RegisterRequest _data;
-  late LogInController _controller;
+  late final RegisterRequest _data;
+  late final LogInController _controller;
 
   RegistrationPage({super.key/*, required this.userName, required this.password*/}){
     _data = RegisterRequest();
@@ -57,9 +57,13 @@ class RegistrationPage extends StatelessWidget {
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
                       try{
+                        final mess = ScaffoldMessenger.of(context);
+                        final nav = Navigator.of(context);
                         await _controller.registerNewUser(_data);
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Usuario registrado con éxito")));
-                        Navigator.pop(context);
+                        //ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Usuario registrado con éxito")));
+                        mess.showSnackBar(const SnackBar(content: Text("Usuario registrado con éxito")));
+                        //Navigator.pop(context);
+                        nav.pop();
                       }catch(error){
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
                       }
